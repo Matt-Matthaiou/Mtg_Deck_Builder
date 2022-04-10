@@ -145,7 +145,7 @@ const CardBox = ()=>
 
     return(
         <>
-            <UserDeck/>
+            <UserDeck userDeck={userDeck}/>
             <h1>Welcome to MTG deck builder</h1>
             <CardFilter editions={sets} changeEdition={changeEdition} searchFunction={searchFunction} filterByRarity={filterbyRarity}/>
             <CardList cards={filteredCards} addCard={addCard}/>
