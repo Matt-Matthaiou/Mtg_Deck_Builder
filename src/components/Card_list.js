@@ -1,13 +1,13 @@
 import React from "react";
 import Card from "./Card";
 
-const CardList = ({cards})=>
+const CardList = ({cards, addCard})=>
 {
 
     const listOfCards = cards.map((mtg, index) =>
         {
             return(
-                <Card mtg={mtg} key={index} index={index}/>
+                <Card mtg={mtg} key={index} index={index} addCard={addCard}/>
             );
         })
 
