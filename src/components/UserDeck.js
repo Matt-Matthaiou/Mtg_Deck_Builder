@@ -1,12 +1,12 @@
 import React from 'react'
 import UserCard from './UserCard'
 
-const UserDeck = ({userDeck})=>
+const UserDeck = ({userDeck, removeCard})=>
 {
     
    const deck = userDeck.map((card, index)=>
     {
-        return <UserCard card={card} key={index}/>
+        return <UserCard card={card} key={index} index={index} removeCard={removeCard}/>
     })
     
 

@@ -14,7 +14,7 @@ const CardBox = ()=>
     const [page, setPage] = useState(1)
     const [filteredCards, setFilteredCards] = useState([])
     const [userDeck, setUserDeck] = useState([])
-    
+   
     
 
     useEffect(()=>
@@ -22,6 +22,8 @@ const CardBox = ()=>
         getCards();
           
     },[page])
+
+    
 
     useEffect(()=>
     {
@@ -142,10 +144,18 @@ const CardBox = ()=>
         }
     }
 
+    const removeCard = (index)=>
+    {
+        const cards = userDeck
+        cards.splice(index,1)
+            
+        setUserDeck(cards)
+    }
+
 
     return(
         <>
-            <UserDeck userDeck={userDeck}/>
+            <UserDeck userDeck={userDeck} removeCard={removeCard}/>
             <h1>Welcome to MTG deck builder</h1>
             <CardFilter editions={sets} changeEdition={changeEdition} searchFunction={searchFunction} filterByRarity={filterbyRarity}/>
             <CardList cards={filteredCards} addCard={addCard}/>
