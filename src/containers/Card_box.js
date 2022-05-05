@@ -10,26 +10,22 @@ const CardBox = ()=>
     const [updatedCards, setUpdatedCards] = useState([])
     const [sets, setSets] = useState([])
     const [cards, setCards] = useState([])
-    const [edition, setEdition] = useState('2ED')
+    const [edition, setEdition] = useState('ZEN')
     const [page, setPage] = useState(1)
     const [filteredCards, setFilteredCards] = useState([])
     const [userDeck, setUserDeck] = useState([])
    
     
-
     useEffect(()=>
     {
         getCards();
           
     },[page])
 
-    
-
     useEffect(()=>
     {
         getEditions();
     },[])
-
 
     useEffect(()=>
     {
@@ -38,27 +34,25 @@ const CardBox = ()=>
        
     },[edition])
 
-    
-
     const getCards = ()=>
     {     
         fetch(`https://api.magicthegathering.io/v1/cards?set=${edition}&page=${page}`)
         .then(res => res.json())
         .then(resu => nextPage(resu))
-        
     }
     
     const getEditions = ()=>
     {
-        fetch('https://api.magicthegathering.io/v1/sets?expansion=core')
-        
-        .then(re => re.json())
-        .then(resu => resu.sets.filter(ex=>
+        const urls = ['https://api.magicthegathering.io/v1/sets?type=expansion', 'https://api.magicthegathering.io/v1/sets?type=core']
+        const promises = urls.map(url =>fetch(url));
+        Promise.all(promises)
+        .then(re => Promise.all(re.map(res => res.json())))
+        .then((result)=>
             {
-                return ex.type === 'core' || ex.type === 'expansion'
-            }))
-        .then(result=> setSets(result))
-        
+                const temp = result[0].sets
+                result[1].sets.map(set=> temp.push(set))
+                setSets(temp)
+            } )
     }
 
     const nextPage = (resu) =>
@@ -76,8 +70,6 @@ const CardBox = ()=>
             setCards(updatedCards)
             setUpdatedCards([])
         }
-       
-        
     }
 
     const changeEdition = (edition)=>
@@ -86,20 +78,34 @@ const CardBox = ()=>
         
     }
 
-
     const searchFunction = (userInput, rarity)=>
     {
-        if (userInput === '' || rarity === '')
+        
+
+        if (userInput === '' && rarity === '')
         {
             setFilteredCards(cards)
         }
-        else 
+        else if (userInput === '')
         {
-            const cardFilter = filteredCards.filter(card => {
+            filterbyRarity(rarity)
+        }
+        else if (rarity === '')
+        {    
+            const cardFilter = cards.filter(card => {
                 return card.name.includes(userInput)})
             setFilteredCards(cardFilter)
         }
+        else
+        {
+            const cardFilter = cards.filter(card =>
+                {
+                    return card.name.includes(userInput) && card.rarity === rarity
+                })
+            setFilteredCards(cardFilter)
+        }
     }
+
     const filterbyRarity = (rarity)=>
     {
         if (rarity === '')
@@ -108,7 +114,7 @@ const CardBox = ()=>
         }
         else
         {
-            const cardFilter = filteredCards.filter(card => {
+            const cardFilter = cards.filter(card => {
                 return card.rarity === rarity})
             setFilteredCards(cardFilter)
         }
@@ -116,28 +122,38 @@ const CardBox = ()=>
 
     const addCard = (cardId)=>
     {
-        const userCards = userDeck
+        const userCards = [...userDeck]
         const findCard = cards.filter(card => 
             {
                 return card.id === cardId
             })
         if (userCards.length === 0)
         {
-            userCards.push(findCard[0])
+            userCards.push({card:findCard[0], number: 1})
             setUserDeck(userCards)
         }
-        else if (userCards.length === 60)
+        else if (userCards.reduce((partialSum, number)=> partialSum + number.number, 0) === 60)
         {
             return;
         }
-        else if (userCards.filter(card =>
-            {
-                return card === findCard[0]
-            }).length < 4)
-            {
-                userCards.push(findCard[0])
-                setUserDeck(userCards)
-            }
+        else if (userCards.some(card =>card.card === findCard[0]
+            ) === false)
+           {
+               userCards.push({card : findCard[0], number: 1})
+               setUserDeck(userCards)
+           }
+        else if (userCards.some(card=> card.card === findCard[0]) === true)
+           {
+               userCards.map((card, index)=>
+               {
+                   if(card.card === findCard[0] && card.number < 4 || card.card === findCard[0] && card.card.supertypes[0] === "Basic")
+                   {
+                        userCards[index].number = card.number + 1
+                       setUserDeck(userCards)
+                       
+                   }
+               })
+           }
         else
         {
             return;
@@ -146,21 +162,37 @@ const CardBox = ()=>
 
     const removeCard = (index)=>
     {
-        const cards = userDeck
-        cards.splice(index,1)
+        const cards = [...userDeck]
+        if (cards[index].number === 1)
+        {
+            cards.splice(index, 1)
+        }
+        else
+        {
+            cards[index].number -= 1
+        }
             
         setUserDeck(cards)
     }
 
+    const clearUserDeck = ()=>
+    {
+        setUserDeck([]);
+    }
 
     return(
-        <>
-            <UserDeck userDeck={userDeck} removeCard={removeCard}/>
-            <h1>Welcome to MTG deck builder</h1>
-            <CardFilter editions={sets} changeEdition={changeEdition} searchFunction={searchFunction} filterByRarity={filterbyRarity}/>
-            <CardList cards={filteredCards} addCard={addCard}/>
+        <div id='app'>
 
-        </>
+            <div id='page'>
+                <h1>Welcome to MTG deck builder</h1>
+                <CardFilter editions={sets} changeEdition={changeEdition} searchFunction={searchFunction} filterByRarity={filterbyRarity}/>
+            </div>
+
+            <div id='main-content'>
+                <CardList cards={filteredCards} addCard={addCard}/>
+                <UserDeck userDeck={userDeck} removeCard={removeCard} clearUserDeck={clearUserDeck}/>
+            </div>
+        </div>
         
     )
 }

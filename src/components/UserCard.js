@@ -3,6 +3,7 @@ import React from 'react'
 
 const UserCard = ({card, removeCard, index})=>
 {
+    
 
     const handleClick = ()=>
     {
@@ -10,8 +11,9 @@ const UserCard = ({card, removeCard, index})=>
     }
 
    return(
-   <li>
-        <span>{card.name}</span><button onClick={handleClick}>&#10060;</button>
+   <li className='user-card'>   
+        <button id='button-card' onClick={handleClick}><b>{card.number}X  </b>{card.card.name}</button>   
+        <img src={card.card.imageUrl} id='hidden-pic'></img>
     </li>
     )
 }

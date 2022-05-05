@@ -1,11 +1,11 @@
 import React, {useState} from "react";
-import EditionOption from "./EditionOption";
+
 
 const Card = ({mtg, index, addCard})=>
 {
     const altText = `Mana cost: ${mtg.manaCost} Description: ${mtg.text}`;
     
-    const [timesAdded, setTimesAdded] = useState(0)
+    
     const [imgClass, setImageClass] = useState('card')
     const handleLoad = ()=>
     {
@@ -15,17 +15,15 @@ const Card = ({mtg, index, addCard})=>
     const handleClick = ()=>
     {
         addCard(mtg.id)
-        if (timesAdded < 4)
-        {
-            setTimesAdded(timesAdded + 1)
-        }
+       
+       
     }
 
     return(
         <div class='card'>
-            <h3>{index+1}: {mtg.name}</h3>
-            <img class={imgClass} src={mtg.imageUrl} alt={altText} onLoad={handleLoad} />
-            <button onClick={handleClick}>Add</button><span>{timesAdded}</span>
+            <h3 style={{color: "white"}}>{index+1}: {mtg.name}</h3>
+            <img class={imgClass} src={mtg.imageUrl} alt={altText} onLoad={handleLoad} onClick={handleClick} />
+            
         </div>
     )
 }

@@ -2,7 +2,7 @@ import React from 'react';
 
 const EditionOption = ({edition, index})=>
 {
-    if (edition.code === '2ED')
+    if (edition.code === 'ZEN')
     {
         return (
             <option value={edition.code} selected>{edition.name}</option>
