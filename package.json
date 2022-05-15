@@ -1,4 +1,5 @@
 {
+  "homepage": "https://matt-matthaiou.github.io/Mtg_Deck_Builder/",
   "name": "magic_the_gathering",
   "version": "0.1.0",
   "private": true,
@@ -10,8 +11,8 @@
     "react-dom": "^18.0.0",
     "react-modal": "^3.14.4",
     "react-scripts": "^5.0.1",
-    "web-vitals": "^2.1.4",
-    "homepage": "https://matt-matthaiou.github.io/mtg_deck_builder/"
+    "web-vitals": "^2.1.4"
+    
   },
   "scripts": {
     "start": "react-scripts start",
