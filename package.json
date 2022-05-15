@@ -11,7 +11,7 @@
     "react-modal": "^3.14.4",
     "react-scripts": "^5.0.1",
     "web-vitals": "^2.1.4",
-    "homepage": "https://matt-matthaiou.github.io/Mtg_Deck_Builder"
+    "homepage": "https://Matt-Matthaiou/Mtg_Deck_Builder"
   },
   "scripts": {
     "start": "react-scripts start",
