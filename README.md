@@ -4,4 +4,8 @@ This is a React app using an external API to display all magick the gathering ca
 
 ## Installation 
 
-To run simply fork the app and pull and use npm start on the main directory with terminal.
+1. Fork and pull the project to your prefered directory.
+2. Use npm install for the dependecies.
+3. Use npm start in terminal to run.
+
+
