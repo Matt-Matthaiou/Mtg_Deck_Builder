@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.1cbceb24.css",
-    "main.js": "/static/js/main.f66b7e4e.js",
-    "static/js/787.12549381.chunk.js": "/static/js/787.12549381.chunk.js",
-    "static/media/background.mp4": "/static/media/background.99123c31406d21a01615.mp4",
-    "static/media/header-background.jpeg": "/static/media/header-background.353dcda443aa254cc628.jpeg",
-    "static/media/backgroundmagic.jpeg": "/static/media/backgroundmagic.9af33b872327157a9f86.jpeg",
-    "index.html": "/index.html",
-    "main.1cbceb24.css.map": "/static/css/main.1cbceb24.css.map",
-    "main.f66b7e4e.js.map": "/static/js/main.f66b7e4e.js.map",
-    "787.12549381.chunk.js.map": "/static/js/787.12549381.chunk.js.map"
+    "main.css": "/Mtg_Deck_Builder/static/css/main.1e9e3ba6.css",
+    "main.js": "/Mtg_Deck_Builder/static/js/main.6ca6a7cd.js",
+    "static/js/787.12549381.chunk.js": "/Mtg_Deck_Builder/static/js/787.12549381.chunk.js",
+    "static/media/background.mp4": "/Mtg_Deck_Builder/static/media/background.99123c31406d21a01615.mp4",
+    "static/media/header-background.jpeg": "/Mtg_Deck_Builder/static/media/header-background.353dcda443aa254cc628.jpeg",
+    "static/media/backgroundmagic.jpeg": "/Mtg_Deck_Builder/static/media/backgroundmagic.9af33b872327157a9f86.jpeg",
+    "index.html": "/Mtg_Deck_Builder/index.html",
+    "main.1e9e3ba6.css.map": "/Mtg_Deck_Builder/static/css/main.1e9e3ba6.css.map",
+    "main.6ca6a7cd.js.map": "/Mtg_Deck_Builder/static/js/main.6ca6a7cd.js.map",
+    "787.12549381.chunk.js.map": "/Mtg_Deck_Builder/static/js/787.12549381.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1cbceb24.css",
-    "static/js/main.f66b7e4e.js"
+    "static/css/main.1e9e3ba6.css",
+    "static/js/main.6ca6a7cd.js"
   ]
 }
